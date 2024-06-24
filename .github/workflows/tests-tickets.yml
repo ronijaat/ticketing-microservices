@@ -1,13 +1,27 @@
 name: tests-tickets
 
 on:
-  pull_request
+  pull_request:
+    paths:
+      - 'tickets/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
-        with: node-version: '18.17.1'
-      - run: cd tickets && npm install && npm run test:ci
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.15.0'
+
+    - name: Install dependencies
+      run: |
+        cd tickets
+        npm install
+
+    - name: Run tests
+      run: npm test
