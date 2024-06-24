@@ -4,14 +4,16 @@ export default ({ currentUser }) => {
   const links = [
     !currentUser && { label: 'Sign Up', href: '/auth/signup' },
     !currentUser && { label: 'Sign In', href: '/auth/signin' },
+    currentUser && { label: 'Sell Tickets', href: '/tickets/new' },
+    currentUser && { label: 'My Orders', href: '/orders' },
     currentUser && { label: 'Sign Out', href: '/auth/signout' },
   ]
     .filter((linkConfig) => linkConfig)
     .map(({ label, href }) => {
       return (
         <li key={href} className="nav-item">
-          <Link className="nav-link" href={href}>
-            {label}
+          <Link href={href}>
+            <p className="nav-link">{label}</p>
           </Link>
         </li>
       );
@@ -19,8 +21,8 @@ export default ({ currentUser }) => {
 
   return (
     <nav className="navbar navbar-light bg-light">
-      <Link className="navbar-brand" href="/">
-        GitTix
+      <Link href="/">
+        <p className="navbar-brand">GitTix</p>
       </Link>
 
       <div className="d-flex justify-content-end">
