@@ -50,7 +50,7 @@ router.post(
 
     // Step 2: Create and confirm a PaymentIntent using the PaymentMethod ID
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: order.price, // Amount in smallest currency unit, e.g., paise for INR
+      amount: order.price * 100, // Amount in smallest currency unit, e.g., paise for INR
       currency: 'inr',
       payment_method: paymentMethod.id,
       confirm: true, // Automatically confirm the payment
